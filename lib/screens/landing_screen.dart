@@ -29,7 +29,7 @@ class LandingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.3,
                   child: imgtxtButton(
                     img: 'images/ambulance.gif',
                     txt: 'PARAMEDIC',
@@ -59,14 +59,14 @@ class LandingScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Already Registered?',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 TextButton(
-                  child: Text(
+                  child: const Text(
                     'LOGIN',
                     style: TextStyle(
                       fontSize: 16,
