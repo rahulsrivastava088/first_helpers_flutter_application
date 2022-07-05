@@ -3,7 +3,6 @@ import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
 import 'package:first_helpers/screens/login_screen.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: LandingScreen.routeName,
       routes: {
         LandingScreen.routeName: (context) => LandingScreen(),
