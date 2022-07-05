@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
 import 'package:first_helpers/screens/login_screen.dart';
+import 'package:first_helpers/screens/user/user-landing-page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         LandingScreen.routeName: (context) => LandingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         UserSignupScreen.routeName: (context) => UserSignupScreen(),
+        UserLanding.routeName:(context) => UserLanding(),
       },
     ); // This trailing comma makes auto-formatting nicer for build methods.);
   }
