@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:first_helpers/utilities/txtinputfield.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = 'login-screen';
@@ -9,39 +10,6 @@ class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Widget userInput(TextEditingController userInput, String hintTitle,
-      TextInputType keyboardType, bool showText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Text(
-            hintTitle,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        TextField(
-          obscureText: showText,
-          controller: userInput,
-          autocorrect: false,
-          enableSuggestions: false,
-          autofocus: false,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: BorderSide(color: Colors.blue)),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: BorderSide(color: Colors.green)),
-          ),
-        ),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +32,12 @@ class LoginScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(
               left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
-          child: userInput(
-              emailController, 'Email:', TextInputType.emailAddress, false),
+          child: TextInputField(userInput: emailController, hintTitle: 'Email:', keyboardType: TextInputType.emailAddress, showText: false),
         ),
         Padding(
           padding: const EdgeInsets.only(
               left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
-          child: userInput(passwordController, 'Password:',
-              TextInputType.visiblePassword, true),
+          child: TextInputField(userInput: passwordController, hintTitle: 'Password:', keyboardType: TextInputType.visiblePassword, showText: true),
         ),
         Container(
           height: 55,
@@ -125,3 +91,4 @@ class LoginScreen extends StatelessWidget {
     )));
   }
 }
+

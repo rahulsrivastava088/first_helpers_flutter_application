@@ -39,7 +39,7 @@ class imgtxtButton extends StatelessWidget {
                 child: Text(
                   txt,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.black,
                   ),
                 ),

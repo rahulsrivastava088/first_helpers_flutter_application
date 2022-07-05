@@ -16,7 +16,10 @@ class LandingScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(child: Image.asset('images/logoimage.png'), width: 100),
+            Container(
+              child: Image.asset('images/logoimage.png'),
+              width: 100,
+            ),
             Container(
               child: Image.asset('images/brandname.png'),
               height: 60,
@@ -25,48 +28,55 @@ class LandingScreen extends StatelessWidget {
               child: Image.asset('images/landing.gif'),
               height: 390,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.35,
-                  child: imgtxtButton(
-                    img: 'images/ambulance.gif',
-                    txt: 'PARAMEDIC',
-                    onPressed: () {},
+            Expanded(
+              flex: 3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: imgtxtButton(
+                      img: 'images/ambulance.gif',
+                      txt: 'PARAMEDIC',
+                      onPressed: () {},
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: imgtxtButton(
-                    img: 'images/doctor.gif',
-                    txt: 'DOCTOR',
-                    onPressed: () {},
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: imgtxtButton(
+                      img: 'images/doctor.gif',
+                      txt: 'DOCTOR',
+                      onPressed: () {},
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: imgtxtButton(
-                    img: 'images/user.gif',
-                    txt: 'USER',
-                    onPressed: () {
-                      Navigator.pushNamed(context, UserSignupScreen.routeName);
-                    },
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: Hero(
+                      tag: 'user.gif',
+                      child: imgtxtButton(
+                        img: 'images/user.gif',
+                        txt: 'USER',
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, UserSignupScreen.routeName);
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Already Registered?',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 TextButton(
-                  child: Text(
+                  child: const Text(
                     'LOGIN',
                     style: TextStyle(
                       fontSize: 16,
