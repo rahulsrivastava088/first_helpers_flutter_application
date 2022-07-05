@@ -74,6 +74,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gif:
+    dependency: "direct main"
+    description:
+      name: gif
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0+1"
   lints:
     dependency: transitive
     description:
