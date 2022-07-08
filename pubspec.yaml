@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   gif: ^1.1.0+1
   curved_navigation_bar: ^1.0.3
+  flutter_lorem: ^2.0.0
 
 dev_dependencies:
   flutter_test:
