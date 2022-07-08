@@ -2,6 +2,7 @@ import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user-landing-page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
+import 'package:first_helpers/utilities/impButton.dart';
 
 class UserSignupScreen extends StatelessWidget {
   static const routeName = 'user-signup-screen';
@@ -15,24 +16,19 @@ class UserSignupScreen extends StatelessWidget {
     return Scaffold(
         // resizeToAvoidBottomInset: false,
         body: Container(
-      color: Colors.white,
-      // clipBehavior: Clip.hardEdge,
-      // decoration: BoxDecoration(gradient: LinearGradient(
-      //     begin: Alignment.topCenter,
-      //     end: Alignment.bottomCenter,
-      //     colors: [
-      //       Color.fromARGB(255, 255, 255, 255),
-      //       Color.fromARGB(255, 109, 209, 255),
-      //     ])),
+          color: Colors.white,
       child: Center(
         child: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
             Hero(
               tag: 'user.gif',
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: Image.asset('images/user.gif'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.25,
+                  child: Image.asset('images/user.gif'),
+                ),
               ),
             ),
             const Padding(
@@ -80,34 +76,20 @@ class UserSignupScreen extends StatelessWidget {
                   keyboardType: TextInputType.visiblePassword,
                   showText: true),
             ),
-            Container(
-              height: 55,
-              padding: const EdgeInsets.only(top: 5, left: 70, right: 70),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.green.shade800),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25)))),
-                onPressed: () {
-                  print(emailController);
-                  print(passwordController);
-                  Navigator.pushNamed(context, UserLanding.routeName);
-                },
-                child: Text(
-                  'Register!',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ImportantButton(
+                txt: 'Register',
+                color: Colors.green.shade800,
+                onPressed: (){},
               ),
             ),
           ],
         ),
       ),
-    ));
+    ),
+    );
   }
 }
+
+

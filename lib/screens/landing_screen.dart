@@ -1,9 +1,12 @@
 import 'package:first_helpers/screens/login_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
+import 'package:first_helpers/screens/doctor/doc_signup_screen.dart';
+import 'package:first_helpers/screens/paramedic/para_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/imgtxtButton.dart';
 import 'package:gif/gif.dart';
+
 
 class LandingScreen extends StatelessWidget {
   static const routeName = 'landing-screen';
@@ -42,12 +45,16 @@ class LandingScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(2.5),
                     child: SizedBox(
                       // width: MediaQuery.of(context).size.width * 0.3,
-                      child: imgtxtButton(
-                        img: 'images/ambulance.gif',
-                        txt: 'PARAMEDIC',
-                        onPressed: () {
-                          Navigator.pushNamed(context, ParaLanding.routeName);
-                        },
+                      child: Hero(
+                        tag: 'para.gif',
+                        child: imgtxtButton(
+                          img: 'images/ambulance.gif',
+                          txt: 'PARAMEDIC',
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ParaSignupScreen.routeName);
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -57,10 +64,16 @@ class LandingScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(2.5),
                     child: SizedBox(
                       // width: MediaQuery.of(context).size.width * 0.3,
-                      child: imgtxtButton(
-                        img: 'images/doctor.gif',
-                        txt: 'DOCTOR',
-                        onPressed: () {},
+                      child: Hero(
+                        tag: 'doc.gif',
+                        child: imgtxtButton(
+                          img: 'images/doctor.gif',
+                          txt: 'DOCTOR',
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, DocSignupScreen.routeName);
+                          },
+                        ),
                       ),
                     ),
                   ),

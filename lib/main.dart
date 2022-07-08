@@ -1,4 +1,6 @@
 import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
+import 'package:first_helpers/screens/doctor/doc_signup_screen.dart';
+import 'package:first_helpers/screens/paramedic/para_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         LandingScreen.routeName: (context) => LandingScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         UserSignupScreen.routeName: (context) => UserSignupScreen(),
+        DocSignupScreen.routeName: (context) => DocSignupScreen(),
+        ParaSignupScreen.routeName: (context) => ParaSignupScreen(),
         UserLanding.routeName:(context) => UserLanding(),
         ParaLanding.routeName:(context) => ParaLanding(),
       },
