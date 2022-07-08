@@ -10,6 +10,7 @@ class UserSignupScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
+  final numberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class UserSignupScreen extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
               child: TextInputField(
-                  userInput: emailController,
+                  userInput: numberController,
                   hintTitle: 'Phone Number:',
                   keyboardType: TextInputType.number,
                   showText: false),
