@@ -1,9 +1,9 @@
 import 'package:first_helpers/screens/login_screen.dart';
+import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/imgtxtButton.dart';
 import 'package:gif/gif.dart';
-
 
 class LandingScreen extends StatelessWidget {
   static const routeName = 'landing-screen';
@@ -45,7 +45,9 @@ class LandingScreen extends StatelessWidget {
                       child: imgtxtButton(
                         img: 'images/ambulance.gif',
                         txt: 'PARAMEDIC',
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, ParaLanding.routeName);
+                        },
                       ),
                     ),
                   ),

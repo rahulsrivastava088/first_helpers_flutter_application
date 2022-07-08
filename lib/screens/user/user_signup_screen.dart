@@ -1,3 +1,5 @@
+import 'package:first_helpers/screens/landing_screen.dart';
+import 'package:first_helpers/screens/user/user-landing-page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 
@@ -13,7 +15,7 @@ class UserSignupScreen extends StatelessWidget {
     return Scaffold(
         // resizeToAvoidBottomInset: false,
         body: Container(
-          color: Colors.white,
+      color: Colors.white,
       // clipBehavior: Clip.hardEdge,
       // decoration: BoxDecoration(gradient: LinearGradient(
       //     begin: Alignment.topCenter,
@@ -91,6 +93,7 @@ class UserSignupScreen extends StatelessWidget {
                 onPressed: () {
                   print(emailController);
                   print(passwordController);
+                  Navigator.pushNamed(context, UserLanding.routeName);
                 },
                 child: Text(
                   'Register!',
