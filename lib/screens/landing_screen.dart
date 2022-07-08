@@ -118,7 +118,7 @@ class LandingScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, LoginScreen.routeName);
                   },
-                )
+                ),
               ],
             ),
           ],

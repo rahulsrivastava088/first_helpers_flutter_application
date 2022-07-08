@@ -15,13 +15,20 @@ class UserLanding extends StatefulWidget {
 }
 
 class _UserLandingState extends State<UserLanding> {
-  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  int index = 0;
 
   List<Widget> navbarItems = [
-    Icon(Icons.list_alt_rounded),
-    Icon(Icons.sos_rounded),
-    Icon(Icons.settings),
-    Icon(Icons.person_outline_rounded),
+    Icon(Icons.list_alt_rounded, size: 30),
+    Icon(Icons.sos_rounded, size: 30),
+    Icon(Icons.settings, size: 30),
+    Icon(Icons.person_outline_rounded, size: 30),
+  ];
+
+  final screens = [
+    BlogScreen(),
+    SosScreen(),
+    SettingScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -31,44 +38,44 @@ class _UserLandingState extends State<UserLanding> {
       child: SafeArea(
         child: Scaffold(
           extendBody: true,
-          // appBar: AppBar(title: Text("Title"));
-          key: scaffoldKey,
           appBar: AppBar(
-            title: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        print("working");
-                      },
-                      icon: Image.asset('images/logoimage.png')),
-                  Text(
-                    'FIRST HELPERS',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+            automaticallyImplyLeading: false,
+            titleSpacing: 0,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      print("working");
+                    },
+                    icon: Image.asset('images/logoimage.png')),
+                Text(
+                  'FIRST HELPERS',
+                  style: TextStyle(
+                    color: Colors.black,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             elevation: 0,
           ),
-          // body:
+          body: screens[index],
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(
                 iconTheme: const IconThemeData(
               color: Colors.white,
             )),
             child: CurvedNavigationBar(
+              index: index,
               buttonBackgroundColor: logoBlue,
               items: navbarItems,
               color: logoGreen,
               height: 60,
               backgroundColor: Colors.transparent,
               animationDuration: Duration(milliseconds: 300),
+              onTap: (index) => setState(() => this.index = index),
             ),
           ),
         ),

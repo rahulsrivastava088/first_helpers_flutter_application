@@ -5,8 +5,10 @@ class BlogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Blog'),
+    return Scaffold(
+      body: Container(
+        child: Text('Blog'),
+      ),
     );
   }
 }

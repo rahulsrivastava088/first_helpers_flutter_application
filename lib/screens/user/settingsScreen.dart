@@ -5,8 +5,10 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('settings'),
+    return Scaffold(
+      body: Container(
+        child: Text('settings'),
+      ),
     );
   }
 }

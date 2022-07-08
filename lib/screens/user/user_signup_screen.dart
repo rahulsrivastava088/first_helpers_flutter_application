@@ -3,6 +3,7 @@ import 'package:first_helpers/screens/user/user-landing-page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
+import 'package:first_helpers/screens/user/user-landing-page.dart';
 
 class UserSignupScreen extends StatelessWidget {
   static const routeName = 'user-signup-screen';
@@ -10,11 +11,12 @@ class UserSignupScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
+  final numberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // resizeToAvoidBottomInset: false,
+      extendBody: true,
         body: Container(
           color: Colors.white,
       child: Center(
@@ -53,7 +55,7 @@ class UserSignupScreen extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
               child: TextInputField(
-                  userInput: emailController,
+                  userInput: numberController,
                   hintTitle: 'Phone Number:',
                   keyboardType: TextInputType.number,
                   showText: false),
@@ -83,6 +85,18 @@ class UserSignupScreen extends StatelessWidget {
                 color: Colors.green.shade800,
                 onPressed: (){},
               ),
+            ),
+            TextButton(
+              child: const Text(
+                'Skip for now ->',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.end,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, UserLanding.routeName);
+              },
             ),
           ],
         ),
