@@ -16,7 +16,7 @@ class UserLanding extends StatefulWidget {
 }
 
 class _UserLandingState extends State<UserLanding> {
-  int index = 0;
+  int index = 1;
 
   List<Widget> navbarItems = [
     Icon(Icons.list_alt_rounded, size: 30),
