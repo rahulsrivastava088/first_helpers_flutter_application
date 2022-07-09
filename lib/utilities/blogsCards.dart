@@ -1,3 +1,4 @@
+import 'package:first_helpers/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,6 +13,7 @@ class BlogCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         // margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: Padding(
@@ -20,9 +22,20 @@ class BlogCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(headline, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+                child: Text(
+                  headline,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.blue.shade900,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              Text(subtitle)
+              Text(
+                subtitle,
+                style: TextStyle(
+                  color: Colors.blueGrey.shade900,
+                ),
+              ),
               ],
           ),
         ),
