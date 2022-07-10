@@ -8,36 +8,31 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {  },
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(Size(
-                    MediaQuery.of(context).size.width * 0.4,
-                    MediaQuery.of(context).size.height * 0.2)),
-                elevation: MaterialStateProperty.all(10),
-                shadowColor: MaterialStateProperty.all(logoBlue),
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                      side: BorderSide(color: logoBlue)),
-                ),
-              ),
-              child: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 214, 213, 213),
-                radius: 80,
-                child: Icon(
-                  Icons.add_a_photo_rounded,
-                  color: Colors.black,
-                ),
-              ),
+        ElevatedButton(
+          onPressed: () {  },
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all(Size(
+                MediaQuery.of(context).size.width * 0.4,
+                MediaQuery.of(context).size.height * 0.2)),
+            elevation: MaterialStateProperty.all(10),
+            shadowColor: MaterialStateProperty.all(logoBlue),
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0),
+                  side: BorderSide(color: logoBlue)),
             ),
-          ],
+          ),
+          child: const CircleAvatar(
+            backgroundColor: Color.fromARGB(255, 214, 213, 213),
+            radius: 80,
+            child: Icon(
+              Icons.person,
+              color: Colors.black,
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),

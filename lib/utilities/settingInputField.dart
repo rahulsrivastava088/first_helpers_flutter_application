@@ -1,19 +1,22 @@
 import 'package:first_helpers/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-class TextInputField extends StatelessWidget {
-  const TextInputField({
+class SettingInputField extends StatelessWidget {
+  const SettingInputField({
     Key? key,
     required this.userInput,
     required this.hintTitle,
     required this.keyboardType,
     required this.showText,
+    required this.title,
   }) : super(key: key);
 
   final TextEditingController userInput;
   final String hintTitle;
+  final String title;
   final TextInputType keyboardType;
   final bool showText;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,9 @@ class TextInputField extends StatelessWidget {
               ),
             ),
           ),
-          TextField(
+          TextFormField(
             obscureText: showText,
+            initialValue: title,
             controller: userInput,
             autocorrect: false,
             enableSuggestions: false,
