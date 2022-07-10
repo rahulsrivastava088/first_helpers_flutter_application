@@ -1,4 +1,5 @@
 import 'package:first_helpers/utilities/blogsCards.dart';
+import 'package:first_helpers/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
@@ -18,7 +19,7 @@ class _BlogScreenState extends State<BlogScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           "Blogs",
           style: TextStyle(
             color: Colors.black,
@@ -64,6 +65,9 @@ class _BlogScreenState extends State<BlogScreen> {
             BlogCard(
                 headline: lorem(words: 10, paragraphs: 1),
                 subtitle: lorem(words: 20, paragraphs: 1)),
+            const SizedBox(
+              height: 60,
+            )
           ],
         ),
       ),
