@@ -79,6 +79,17 @@ class DocSignupScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: ImportantButton(txt: 'Register', color: Colors.green.shade800, onPressed: (){},),
                 ),
+                TextButton(
+                  child: const Text(
+                    'Skip for now ->',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  onPressed: () {
+
+                  },
+                ),
               ],
             ),
           ),

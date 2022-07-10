@@ -90,7 +90,6 @@ class UserSignupScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                 ),
-                textAlign: TextAlign.end,
               ),
               onPressed: () {
                 Navigator.pushNamed(context, UserLanding.routeName);

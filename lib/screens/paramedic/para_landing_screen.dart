@@ -1,4 +1,6 @@
+import 'package:first_helpers/utilities/constants.dart';
 import 'package:first_helpers/utilities/detailCardTile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ParaLanding extends StatefulWidget {
@@ -13,68 +15,82 @@ class ParaLanding extends StatefulWidget {
 class _ParaLandingState extends State<ParaLanding> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Dashboard"),
-        actions: [
-          IconButton(
-            onPressed: (){
-              showModalBottomSheet(context: context, builder: (BuildContext context){
-                return Container(
-                  height: 300,
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 40,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Name: Paramedic Operator Name"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Phone Number: 1234567890"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Hospital Name: XYZ Hospital"),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+    return Container(
+      color: logoGreen,
+      child: SafeArea(
+        child: Scaffold(
+            extendBody: true,
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              titleSpacing: 0,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        print("working");
+                      },
+                      icon: Image.asset('images/logoimage.png')),
+                  const Text(
+                    'FIRST HELPERS',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
-                );
-              });
-            },
-            icon: Icon(Icons.badge_rounded),
-          )
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          CardTile(patientname: "Patient 1", location: "Location 1"),
-          CardTile(patientname: "Patient 2", location: "Location 2"),
-          CardTile(patientname: "Patient 3", location: "Location 3"),
-          CardTile(patientname: "Patient 4", location: "Location 4"),
-          CardTile(patientname: "Patient 5", location: "Location 5"),
-          CardTile(patientname: "Patient 6", location: "Location 6"),
-          CardTile(patientname: "Patient 7", location: "Location 7"),
-        ],
+                ],
+              ),
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              elevation: 0,
+            ),
+          body: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: const Text(
+                "Dashboard",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                ),
+              ),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.refresh_rounded),
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: CupertinoScrollbar(
+                child: ListView(
+                  children: <Widget>[
+                    CardTile(patientName: "Patient 1", location: "Location 1"),
+                    CardTile(patientName: "Patient 2", location: "Location 2"),
+                    CardTile(patientName: "Patient 3", location: "Location 3"),
+                    CardTile(patientName: "Patient 4", location: "Location 4"),
+                    CardTile(patientName: "Patient 5", location: "Location 5"),
+                    CardTile(patientName: "Patient 6", location: "Location 6"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                    CardTile(patientName: "Patient 7", location: "Location 7"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
@@ -78,6 +79,17 @@ class ParaSignupScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ImportantButton(txt: 'Register', color: Colors.green.shade800, onPressed: (){},),
+              ),
+              TextButton(
+                child: const Text(
+                  'Skip for now ->',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, ParaLanding.routeName);
+                },
               ),
             ],
           ),
