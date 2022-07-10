@@ -5,6 +5,7 @@ import 'blogScreen.dart';
 import 'package:first_helpers/screens/user/profileScreen.dart';
 import 'package:first_helpers/screens/user/sosScreen.dart';
 import 'package:first_helpers/screens/user/settingsScreen.dart';
+import 'doctorScreen.dart';
 
 
 class UserLanding extends StatefulWidget {
@@ -16,10 +17,11 @@ class UserLanding extends StatefulWidget {
 }
 
 class _UserLandingState extends State<UserLanding> {
-  int index = 1;
+  int index = 2;
 
   List<Widget> navbarItems = [
     Icon(Icons.list_alt_rounded, size: 30),
+    Icon(Icons.medical_services_rounded, size: 30),
     Icon(Icons.sos_rounded, size: 30),
     Icon(Icons.settings, size: 30),
     Icon(Icons.person_outline_rounded, size: 30),
@@ -27,6 +29,7 @@ class _UserLandingState extends State<UserLanding> {
 
   final screens = [
     BlogScreen(),
+    DoctorScreen(),
     SosScreen(),
     SettingScreen(),
     ProfileScreen(),
