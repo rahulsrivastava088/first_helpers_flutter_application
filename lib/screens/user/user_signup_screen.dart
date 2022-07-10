@@ -1,9 +1,7 @@
-import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user-landing-page.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
-import 'package:first_helpers/screens/user/user-landing-page.dart';
 
 class UserSignupScreen extends StatelessWidget {
   static const routeName = 'user-signup-screen';
@@ -92,7 +90,6 @@ class UserSignupScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                 ),
-                textAlign: TextAlign.end,
               ),
               onPressed: () {
                 Navigator.pushNamed(context, UserLanding.routeName);

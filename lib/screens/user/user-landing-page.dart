@@ -49,11 +49,9 @@ class _UserLandingState extends State<UserLanding> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {
-                      print("working");
-                    },
+                    onPressed: () {},
                     icon: Image.asset('images/logoimage.png')),
-                Text(
+                const Text(
                   'FIRST HELPERS',
                   style: TextStyle(
                     color: Colors.black,
