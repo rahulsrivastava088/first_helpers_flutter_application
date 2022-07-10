@@ -1,7 +1,7 @@
 import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
 import 'package:first_helpers/screens/doctor/doc_signup_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_signup_screen.dart';
-import 'package:first_helpers/screens/user/blogScreen.dart';
+import 'package:first_helpers/screens/chatScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ParaSignupScreen.routeName: (context) => ParaSignupScreen(),
         UserLanding.routeName:(context) => UserLanding(),
         ParaLanding.routeName:(context) => ParaLanding(),
-        BlogScreen.routeName:(context) => BlogScreen(),
+        ChatScreen.routeName:(context) => ChatScreen(),
       },
     ); // This trailing comma makes auto-formatting nicer for build methods.);
   }
