@@ -36,11 +36,17 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text(
+                    'By:Author Name',
+                    style: TextStyle(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   TextButton(
                       onPressed: () {},
-                      
                       style:
                           TextButton.styleFrom(primary: Colors.blue.shade900),
                       child: Text(
