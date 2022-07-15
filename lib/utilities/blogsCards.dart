@@ -1,7 +1,6 @@
 import 'package:first_helpers/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-
 class BlogCard extends StatelessWidget {
   String headline;
   String subtitle;
@@ -36,7 +35,29 @@ class BlogCard extends StatelessWidget {
                   color: Colors.blueGrey.shade900,
                 ),
               ),
-              ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'By:Author Name',
+                    style: TextStyle(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      style:
+                          TextButton.styleFrom(primary: Colors.blue.shade900),
+                      child: Text(
+                        'Read More',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                ],
+              ),
+            ],
           ),
         ),
       ),
