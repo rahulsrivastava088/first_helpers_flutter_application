@@ -6,6 +6,8 @@ import '../../utilities/constants.dart';
 
 class SettingScreen extends StatelessWidget {
 
+  static const routeName = 'user_setting_screen';
+
   final emailController = TextEditingController(text : 'xyz@abc.com');
   final nameController = TextEditingController(text: 'Patient Name');
   final numberController = TextEditingController(text: '1234567890');
@@ -24,13 +26,11 @@ class SettingScreen extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
             CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 214, 213, 213),
+              backgroundColor: Colors.transparent,
               radius: 80,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(Size(
-                      MediaQuery.of(context).size.width * 0.4,
-                      MediaQuery.of(context).size.height * 0.2)),
+                  fixedSize: MaterialStateProperty.all(Size(150,150),),
                   backgroundColor: MaterialStateProperty.all(Colors.white),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(

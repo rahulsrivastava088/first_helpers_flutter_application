@@ -2,6 +2,7 @@ import 'package:first_helpers/utilities/messageBubble.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/constants.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -24,6 +25,13 @@ class _ChatScreenState extends State<ChatScreen> {
           "Doctor 1",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.call_rounded),
+            color: Colors.black,
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -34,18 +42,18 @@ class _ChatScreenState extends State<ChatScreen> {
                   reverse: true,
                   padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
                   children: [
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
-                    MessageBubble(sender: "Me", text: "Hello", isMe: true),
-                    MessageBubble(sender: "Doctor 1", text: "Hello", isMe: false),
+                    MessageBubble(sender: "Me", text: lorem(paragraphs: 1,words: 5), isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 7), isMe: false),
+                    MessageBubble(sender: "Me", text: lorem(paragraphs: 1,words: 4), isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 3), isMe: false),
+                    MessageBubble(sender: "Me", text: "Magar operation se darta hu", isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 5), isMe: false),
+                    MessageBubble(sender: "Me", text: "Mujhe kabz hai", isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 7), isMe: false),
+                    MessageBubble(sender: "Me", text: lorem(paragraphs: 1,words: 5), isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 2), isMe: false),
+                    MessageBubble(sender: "Me", text: lorem(paragraphs: 1,words: 5), isMe: true),
+                    MessageBubble(sender: "Doctor 1", text: lorem(paragraphs: 1,words: 3), isMe: false),
                   ],
                 ),
               ),

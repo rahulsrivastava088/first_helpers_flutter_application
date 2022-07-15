@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:first_helpers/screens/chatScreen.dart';
 
+import 'constants.dart';
+
 class ChatTile extends StatelessWidget {
   String username;
   String imageUrl;
@@ -12,8 +14,10 @@ class ChatTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            side: new BorderSide(color: logoBlue, width: 2.0),
+          ),
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: Padding(
             padding: const EdgeInsets.only(

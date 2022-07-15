@@ -11,7 +11,10 @@ class SosScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
             child: Text(
               "An Emergency?\nJust press the 'SOS' button below and we'll be on our way to your current location.",
               softWrap: true,
@@ -35,13 +38,14 @@ class SosScreen extends StatelessWidget {
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 70.0, top: 8,),
+            padding: const EdgeInsets.only(
+              bottom: 70.0,
+              top: 8,
+            ),
             child: GestureDetector(
               child: ElevatedButton(
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(Size(
-                      MediaQuery.of(context).size.width * 0.5,
-                      MediaQuery.of(context).size.height * 0.25)),
+                  fixedSize: MaterialStateProperty.all(Size(180, 180)),
                   elevation: MaterialStateProperty.all(20),
                   shadowColor: MaterialStateProperty.all(Colors.red),
                   backgroundColor: MaterialStateProperty.all(Colors.white),
@@ -61,3 +65,6 @@ class SosScreen extends StatelessWidget {
     );
   }
 }
+
+// MediaQuery.of(context).size.width * 0.5,
+// MediaQuery.of(context).size.height * 0.25

@@ -6,6 +6,7 @@ import 'package:first_helpers/screens/user/profileScreen.dart';
 import 'package:first_helpers/screens/user/sosScreen.dart';
 import 'package:first_helpers/screens/user/settingsScreen.dart';
 import 'doctorScreen.dart';
+import 'package:first_helpers/screens/user/reportsScreen.dart';
 
 
 class UserLanding extends StatefulWidget {
@@ -23,7 +24,7 @@ class _UserLandingState extends State<UserLanding> {
     Icon(Icons.list_alt_rounded, size: 30),
     Icon(Icons.medical_services_rounded, size: 30),
     Icon(Icons.sos_rounded, size: 30),
-    Icon(Icons.settings, size: 30),
+    Icon(Icons.fact_check_outlined, size: 30),
     Icon(Icons.person_outline_rounded, size: 30),
   ];
 
@@ -31,8 +32,9 @@ class _UserLandingState extends State<UserLanding> {
     BlogScreen(),
     DoctorScreen(),
     SosScreen(),
-    SettingScreen(),
+    ReportsScreen(),
     ProfileScreen(),
+    SettingScreen(),
   ];
 
   @override
@@ -76,7 +78,7 @@ class _UserLandingState extends State<UserLanding> {
               color: logoGreen,
               height: 60,
               backgroundColor: Colors.transparent,
-              animationDuration: Duration(milliseconds: 300),
+              animationDuration: const Duration(milliseconds: 300),
               onTap: (index) => setState(() => this.index = index),
             ),
           ),

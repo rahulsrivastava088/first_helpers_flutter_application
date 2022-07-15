@@ -1,3 +1,4 @@
+import 'package:first_helpers/screens/doctor/doc_landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
@@ -87,7 +88,7 @@ class DocSignupScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-
+                    Navigator.pushNamed(context, DocLanding.routeName);
                   },
                 ),
               ],
