@@ -18,6 +18,7 @@ class UserLanding extends StatefulWidget {
 }
 
 class _UserLandingState extends State<UserLanding> {
+  
   int index = 2;
 
   List<Widget> navbarItems = [
@@ -51,7 +52,8 @@ class _UserLandingState extends State<UserLanding> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                     icon: Image.asset('images/logoimage.png')),
                 const Text(
                   'FIRST HELPERS',

@@ -1,8 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/constants.dart';
+import 'user-landing-page.dart';
+import 'package:location/location.dart';
+import 'package:first_helpers/utilities/getLocation.dart';
 
-class SosScreen extends StatelessWidget {
+class SosScreen extends StatefulWidget {
   const SosScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SosScreen> createState() => _SosScreenState();
+}
+
+class _SosScreenState extends State<SosScreen> {
+  LocationData? currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    initLocationService();
+  }
+
+  Future initLocationService() async {
+    var location = Location();
+
+    if (!await location.serviceEnabled()) {
+      if (!await location.requestService()) {
+        return;
+      }
+    }
+
+    var permission = await location.hasPermission();
+    if (permission == PermissionStatus.denied) {
+      permission = await location.requestPermission();
+      if (permission != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    var loc = await location.getLocation();
+
+    setState(() {
+      currentLocation = loc;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +95,13 @@ class SosScreen extends StatelessWidget {
                         side: BorderSide(color: Colors.red)),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  // print(currentLocation!.latitude.toString() +" "+ currentLocation!.longitude.toString());
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("Latitude:"+currentLocation!.latitude.toString() +" "+"Longitude:"+currentLocation!.longitude.toString()),
+                    duration: Duration(seconds: 4),
+                  ));
+                },
                 child: Image.asset('images/sos.png'),
               ),
             ),
@@ -68,3 +114,5 @@ class SosScreen extends StatelessWidget {
 
 // MediaQuery.of(context).size.width * 0.5,
 // MediaQuery.of(context).size.height * 0.25
+
+
