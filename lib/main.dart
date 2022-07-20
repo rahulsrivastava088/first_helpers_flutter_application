@@ -9,8 +9,11 @@ import 'package:first_helpers/screens/landing_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
 import 'package:first_helpers/screens/login_screen.dart';
 import 'package:first_helpers/screens/user/user-landing-page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
