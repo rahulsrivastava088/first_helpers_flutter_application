@@ -1,12 +1,14 @@
+import 'package:first_helpers/screens/doctor/doc_login_screen.dart';
 import 'package:first_helpers/screens/login_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
+import 'package:first_helpers/screens/paramedic/para_login_screen.dart';
+import 'package:first_helpers/screens/user/user_login_screen.dart';
 import 'package:first_helpers/screens/user/user_signup_screen.dart';
 import 'package:first_helpers/screens/doctor/doc_signup_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/imgtxtButton.dart';
 import 'package:gif/gif.dart';
-
 
 class LandingScreen extends StatelessWidget {
   static const routeName = 'landing-screen';
@@ -52,7 +54,7 @@ class LandingScreen extends StatelessWidget {
                           txt: 'PARAMEDIC',
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, ParaSignupScreen.routeName);
+                                context, ParaLoginScreen.routeName);
                           },
                         ),
                       ),
@@ -71,7 +73,7 @@ class LandingScreen extends StatelessWidget {
                           txt: 'DOCTOR',
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, DocSignupScreen.routeName);
+                                context, DocLoginScreen.routeName);
                           },
                         ),
                       ),
@@ -90,7 +92,7 @@ class LandingScreen extends StatelessWidget {
                           txt: 'USER',
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, UserSignupScreen.routeName);
+                                context, UserLoginScreen.routeName);
                           },
                         ),
                       ),
