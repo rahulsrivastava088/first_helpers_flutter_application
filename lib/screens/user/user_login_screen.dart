@@ -6,7 +6,7 @@ import 'package:first_helpers/utilities/authorization.dart';
 import 'user-landing-page.dart';
 
 class UserLoginScreen extends StatelessWidget {
-  static const routeName = 'login-screen';
+  static const routeName = 'user-login-screen';
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -77,6 +77,7 @@ class UserLoginScreen extends StatelessWidget {
                 child: const Text(
                   'Skip for now ->',
                   style: TextStyle(
+                    color: Colors.black,
                     fontSize: 16,
                   ),
                 ),

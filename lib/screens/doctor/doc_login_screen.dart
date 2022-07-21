@@ -6,7 +6,7 @@ import 'package:first_helpers/utilities/authorization.dart';
 import 'doc_landing_screen.dart';
 
 class DocLoginScreen extends StatelessWidget {
-  static const routeName = 'login-screen';
+  static const routeName = 'doc-login-screen';
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -77,6 +77,7 @@ class DocLoginScreen extends StatelessWidget {
                 child: const Text(
                   'Skip for now ->',
                   style: TextStyle(
+                    color: Colors.black,
                     fontSize: 16,
                   ),
                 ),

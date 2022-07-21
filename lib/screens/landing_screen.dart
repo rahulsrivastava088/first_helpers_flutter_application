@@ -1,11 +1,8 @@
 import 'package:first_helpers/screens/doctor/doc_login_screen.dart';
-import 'package:first_helpers/screens/login_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_login_screen.dart';
+import 'package:first_helpers/screens/signupScreen.dart';
 import 'package:first_helpers/screens/user/user_login_screen.dart';
-import 'package:first_helpers/screens/user/user_signup_screen.dart';
-import 'package:first_helpers/screens/doctor/doc_signup_screen.dart';
-import 'package:first_helpers/screens/paramedic/para_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/imgtxtButton.dart';
 import 'package:gif/gif.dart';
@@ -105,20 +102,20 @@ class LandingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Already Registered?',
+                  'New User?',
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
                 TextButton(
                   child: const Text(
-                    'LOGIN',
+                    'REGISTER',
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.routeName);
+                    Navigator.pushNamed(context, SignUpScreen.routeName);
                   },
                 ),
               ],

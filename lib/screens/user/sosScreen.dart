@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/constants.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'user-landing-page.dart';
 import 'package:location/location.dart';
 import 'package:first_helpers/utilities/authorization.dart';
@@ -15,6 +16,11 @@ class SosScreen extends StatefulWidget {
 class _SosScreenState extends State<SosScreen> {
   late bool showLoading;
   LocationData? currentLocation;
+
+  static const CameraPosition _kGooglePost = CameraPosition(
+    target: LatLng(37.4279, -122.0857),
+    zoom: 14.4746,
+  );
 
   @override
   void initState() {
@@ -54,7 +60,9 @@ class _SosScreenState extends State<SosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: showLoading
-          ? LoadingScreen(hintText: "Fetching Location..",)
+          ? LoadingScreen(
+              hintText: "Fetching Location..",
+            )
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -71,19 +79,23 @@ class _SosScreenState extends State<SosScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  child: Image.asset(
-                    'images/map.png',
+                SizedBox(
+                  height: 250,
+                  width: MediaQuery.of(context).size.width * 0.97,
+                  child: Container(
+                    child: GoogleMap(
+                      initialCameraPosition: _kGooglePost,
+                    ),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(2.0),
+                    decoration: BoxDecoration(
+                        color: logoGreen,
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                          color: logoBlue,
+                          width: 2,
+                        )),
                   ),
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(2.0),
-                  decoration: BoxDecoration(
-                      color: logoGreen,
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(
-                        color: logoBlue,
-                        width: 2,
-                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
