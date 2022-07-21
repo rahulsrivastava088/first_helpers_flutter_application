@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
 import 'package:first_helpers/utilities/authorization.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const routeName = 'user-signup-screen';
@@ -84,7 +85,16 @@ class SignUpScreen extends StatelessWidget {
                         .handleSignUp(emailController.text.trim(),
                             passwordController.text.trim())
                         .then((User user) {
-                      Navigator.pushNamed(context, UserLanding.routeName);
+                      Map<String, dynamic> data = {
+                      'name': nameController.text,
+                        'phoneNumber': numberController.text.trim(),
+                        'email': emailController.text.trim(),
+                        'uid': user.uid,
+                    };
+                      FirebaseFirestore.instance.collection('users').doc(user.uid).set(data);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          UserLanding.routeName,
+                          (Route<dynamic> route) => false);
                     }).catchError((e) => print(e));
                   },
                 ),

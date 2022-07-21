@@ -3,8 +3,12 @@ import 'package:first_helpers/utilities/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'user-landing-page.dart';
 import 'package:location/location.dart';
-import 'package:first_helpers/utilities/authorization.dart';
 import 'package:first_helpers/utilities/loadingSpinner.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 class SosScreen extends StatefulWidget {
   const SosScreen({Key? key}) : super(key: key);
@@ -85,6 +89,7 @@ class _SosScreenState extends State<SosScreen> {
                   child: Container(
                     child: GoogleMap(
                       initialCameraPosition: _kGooglePost,
+                      myLocationEnabled: false,
                     ),
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(2.0),
@@ -116,16 +121,24 @@ class _SosScreenState extends State<SosScreen> {
                               side: BorderSide(color: Colors.red)),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async{
                         // print(currentLocation!.latitude.toString() +" "+ currentLocation!.longitude.toString());
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Latitude:" +
-                              currentLocation!.latitude.toString() +
-                              " " +
-                              "Longitude:" +
-                              currentLocation!.longitude.toString()),
-                          duration: Duration(seconds: 4),
-                        ));
+                        var snap = await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(auth.currentUser!.uid)
+                            .get();
+
+                        Map<String, dynamic> data = {
+                          'name': snap.data()?['name'],
+                          'phoneNumber': snap.data()?['phoneNumber'],
+                          'latitude': currentLocation!.latitude,
+                          'longitude': currentLocation!.longitude,
+                          'uid': auth.currentUser!.uid
+                        };
+                        FirebaseFirestore.instance
+                            .collection('locations')
+                            .doc(auth.currentUser!.uid)
+                            .set(data);
                       },
                       child: Image.asset('images/sos.png'),
                     ),
