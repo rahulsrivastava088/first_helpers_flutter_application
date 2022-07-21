@@ -2,6 +2,8 @@ import 'package:first_helpers/utilities/constants.dart';
 import 'package:first_helpers/utilities/detailCardTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ParaLanding extends StatefulWidget {
   const ParaLanding({Key? key}) : super(key: key);
@@ -19,39 +21,39 @@ class _ParaLandingState extends State<ParaLanding> {
       color: logoGreen,
       child: SafeArea(
         child: Scaffold(
-            extendBody: true,
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              titleSpacing: 0,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        print("working");
-                      },
-                      icon: Image.asset('images/logoimage.png')),
-                  const Text(
-                    'FIRST HELPERS',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+          extendBody: true,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            titleSpacing: 0,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      print("working");
+                    },
+                    icon: Image.asset('images/logoimage.png')),
+                const Text(
+                  'FIRST HELPERS',
+                  style: TextStyle(
+                    color: Colors.black,
                   ),
-                ],
-              ),
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              elevation: 0,
+                ),
+              ],
             ),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+          ),
           body: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               title: const Text(
                 "Dashboard",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800,
+                  color: Colors.black,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               backgroundColor: Colors.transparent,
@@ -64,35 +66,35 @@ class _ParaLandingState extends State<ParaLanding> {
                 ),
               ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: CupertinoScrollbar(
-                child: ListView(
-                  children: <Widget>[
-                    CardTile(patientName: "Patient 1", location: "Location 1"),
-                    CardTile(patientName: "Patient 2", location: "Location 2"),
-                    CardTile(patientName: "Patient 3", location: "Location 3"),
-                    CardTile(patientName: "Patient 4", location: "Location 4"),
-                    CardTile(patientName: "Patient 5", location: "Location 5"),
-                    CardTile(patientName: "Patient 6", location: "Location 6"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                    CardTile(patientName: "Patient 7", location: "Location 7"),
-                  ],
-                ),
-              ),
-            ),
+            body: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("locations")
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Text("No data");
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: CupertinoScrollbar(
+                          child: ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: ((context, index) {
+                                DocumentSnapshot data =
+                                    snapshot.data!.docs[index];
+                                var latitude = data['latitude'];
+                                var longitude = data['longitude'];
+                                return CardTile(
+                                    patientName: data['name'],
+                                    location: "$latitude $longitude");
+                              }))),
+                    );
+                  }
+                }),
           ),
         ),
       ),
     );
   }
 }
-
