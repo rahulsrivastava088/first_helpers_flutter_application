@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -19,12 +21,11 @@ class SosScreen extends StatefulWidget {
 
 class _SosScreenState extends State<SosScreen> {
   late bool showLoading;
-  LocationData? currentLocation;
+  late LocationData currentLocation;
+  late CameraPosition kGooglePost;
+  late List<Marker> marker;
 
-  static const CameraPosition _kGooglePost = CameraPosition(
-    target: LatLng(37.4279, -122.0857),
-    zoom: 14.4746,
-  );
+  Completer<GoogleMapController> _controller = Completer();
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _SosScreenState extends State<SosScreen> {
     setState(() {
       showLoading = true;
     });
+
     if (!await location.serviceEnabled()) {
       if (!await location.requestService()) {
         return;
@@ -53,10 +55,24 @@ class _SosScreenState extends State<SosScreen> {
     }
 
     var loc = await location.getLocation();
+    var camPos = await CameraPosition(
+      target: LatLng(loc.latitude!.toDouble(), loc.longitude!.toDouble()),
+      zoom: 14.4746,
+    );
+    List<Marker> maarker = [
+      await Marker(
+        markerId: MarkerId('0'),
+        position: LatLng(currentLocation.latitude!.toDouble(),
+            currentLocation.longitude!.toDouble()),
+        infoWindow: const InfoWindow(title: 'Your Location'),
+      ),
+    ];
 
     setState(() {
       showLoading = false;
       currentLocation = loc;
+      kGooglePost = camPos;
+      marker = maarker;
     });
   }
 
@@ -88,8 +104,13 @@ class _SosScreenState extends State<SosScreen> {
                   width: MediaQuery.of(context).size.width * 0.97,
                   child: Container(
                     child: GoogleMap(
-                      initialCameraPosition: _kGooglePost,
-                      myLocationEnabled: false,
+                      initialCameraPosition: kGooglePost,
+                      myLocationButtonEnabled: false,
+                      mapType: MapType.hybrid,
+                      markers: Set<Marker>.from(marker),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
                     ),
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(2.0),
@@ -121,7 +142,7 @@ class _SosScreenState extends State<SosScreen> {
                               side: BorderSide(color: Colors.red)),
                         ),
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
                         // print(currentLocation!.latitude.toString() +" "+ currentLocation!.longitude.toString());
                         var snap = await FirebaseFirestore.instance
                             .collection('users')
@@ -131,10 +152,11 @@ class _SosScreenState extends State<SosScreen> {
                         Map<String, dynamic> data = {
                           'name': snap.data()?['name'],
                           'phoneNumber': snap.data()?['phoneNumber'],
-                          'latitude': currentLocation!.latitude,
-                          'longitude': currentLocation!.longitude,
+                          'latitude': currentLocation.latitude,
+                          'longitude': currentLocation.longitude,
                           'uid': auth.currentUser!.uid
                         };
+
                         FirebaseFirestore.instance
                             .collection('locations')
                             .doc(auth.currentUser!.uid)

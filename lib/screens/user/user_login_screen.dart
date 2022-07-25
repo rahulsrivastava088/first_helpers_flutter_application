@@ -18,9 +18,8 @@ class UserLoginScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [
             Hero(
               tag: 'user.gif',
@@ -41,7 +40,7 @@ class UserLoginScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
+            Padding( 
               padding: const EdgeInsets.only(
                   left: 20.0, right: 20.0, top: 10.0, bottom: 10.0),
               child: TextInputField(
