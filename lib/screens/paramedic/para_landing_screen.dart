@@ -73,7 +73,9 @@ class _ParaLandingState extends State<ParaLanding> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
-                    return Text("No data");
+                    return Container(
+                      child: Center(child: Text("Empty"))
+                    );
                   } else {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -86,8 +88,17 @@ class _ParaLandingState extends State<ParaLanding> {
                                 var latitude = data['latitude'];
                                 var longitude = data['longitude'];
                                 return CardTile(
-                                    patientName: data['name'],
-                                    location: "$latitude $longitude");
+                                  patientName: data['name'],
+                                  location: "$latitude $longitude",
+                                  onpressed: () async {
+                                    await FirebaseFirestore.instance
+                                        .runTransaction(
+                                            (Transaction myTransaction) async {
+                                      await myTransaction
+                                          .delete(data.reference);
+                                    });
+                                  },
+                                );
                               }))),
                     );
                   }
