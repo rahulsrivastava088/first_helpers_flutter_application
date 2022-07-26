@@ -88,7 +88,7 @@ class _ParaLandingState extends State<ParaLanding> {
                                 var latitude = data['latitude'];
                                 var longitude = data['longitude'];
                                 return CardTile(
-                                  patientName: data['name'],
+                                  patientName: data['name']==null?"Anonymous":data['name'],
                                   location: "$latitude $longitude",
                                   onpressed: () async {
                                     await FirebaseFirestore.instance

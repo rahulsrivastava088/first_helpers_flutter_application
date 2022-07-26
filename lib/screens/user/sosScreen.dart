@@ -55,15 +55,15 @@ class _SosScreenState extends State<SosScreen> {
     }
 
     var loc = await location.getLocation();
-    var camPos = await CameraPosition(
+        var camPos = CameraPosition(
       target: LatLng(loc.latitude!.toDouble(), loc.longitude!.toDouble()),
       zoom: 14.4746,
     );
     List<Marker> maarker = [
-      await Marker(
+        Marker(
         markerId: MarkerId('0'),
-        position: LatLng(currentLocation.latitude!.toDouble(),
-            currentLocation.longitude!.toDouble()),
+        position: LatLng(loc.latitude!.toDouble(),
+            loc.longitude!.toDouble()),
         infoWindow: const InfoWindow(title: 'Your Location'),
       ),
     ];
@@ -170,11 +170,6 @@ class _SosScreenState extends State<SosScreen> {
             ),
     );
   }
+
 }
-
-
-
-// MediaQuery.of(context).size.width * 0.5,
-// MediaQuery.of(context).size.height * 0.25
-
 

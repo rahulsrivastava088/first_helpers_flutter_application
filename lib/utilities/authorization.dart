@@ -19,4 +19,11 @@ class Auth {
 
     return user;
   }
+
+  Future<User> handleAnonymous() async {
+    UserCredential result = await auth.signInAnonymously();
+
+    final User user = result.user!;
+    return user;
+  }
 }

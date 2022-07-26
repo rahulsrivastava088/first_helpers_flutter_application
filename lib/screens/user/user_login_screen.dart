@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/txtinputfield.dart';
 import 'package:first_helpers/utilities/impButton.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_helpers/utilities/authorization.dart';
 import 'user-landing-page.dart';
@@ -66,7 +67,7 @@ class UserLoginScreen extends StatelessWidget {
                     .handleSignInEmail(emailController.text.trim(),
                         passwordController.text.trim())
                     .then((User user) {
-                  Navigator.pushNamed(context, UserLanding.routeName);
+                  Navigator.of(context).pushNamedAndRemoveUntil(UserLanding.routeName, (Route<dynamic> route)=>false);
                 }).catchError((e) => print(e));
               },
             ),
@@ -81,7 +82,10 @@ class UserLoginScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, UserLanding.routeName);
+                  authHandler.handleAnonymous()
+                    .then((User user) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(UserLanding.routeName, (Route<dynamic> route)=>false);
+                }).catchError((e) => print(e));
                 },
               ),
             ),
