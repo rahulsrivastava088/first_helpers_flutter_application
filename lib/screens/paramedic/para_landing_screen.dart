@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class ParaLanding extends StatefulWidget {
   const ParaLanding({Key? key}) : super(key: key);
 
@@ -73,9 +74,7 @@ class _ParaLandingState extends State<ParaLanding> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
-                    return Container(
-                      child: Center(child: Text("Empty"))
-                    );
+                    return Container(child: Center(child: Text("Empty")));
                   } else {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -88,9 +87,23 @@ class _ParaLandingState extends State<ParaLanding> {
                                 var latitude = data['latitude'];
                                 var longitude = data['longitude'];
                                 return CardTile(
-                                  patientName: data['name']==null?"Anonymous":data['name'],
+                                  patientName: data['name'] == null
+                                      ? "Anonymous"
+                                      : data['name'],
                                   location: "$latitude $longitude",
                                   onpressed: () async {
+                                    Map<String, dynamic> docData = {
+                                      'name': data['name'] == null
+                                          ? "Anonymous"
+                                          : data['name'],
+                                      'phoneNumber': data['phoneNumber'] == null
+                                          ? "Not Available!"
+                                          : data['phoneNumber'],
+                                    };
+                                    await FirebaseFirestore.instance
+                                        .collection("docAccepted")
+                                        .doc(data['uid'])
+                                        .set(docData);
                                     await FirebaseFirestore.instance
                                         .runTransaction(
                                             (Transaction myTransaction) async {

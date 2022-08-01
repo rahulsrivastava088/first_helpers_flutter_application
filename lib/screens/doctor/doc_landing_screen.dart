@@ -1,7 +1,9 @@
 import 'package:first_helpers/utilities/constants.dart';
-import 'package:first_helpers/utilities/detailCardTile.dart';
+import 'package:first_helpers/utilities/docDashDetailCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DocLanding extends StatefulWidget {
   const DocLanding({Key? key}) : super(key: key);
@@ -64,26 +66,42 @@ class _DocLandingState extends State<DocLanding> {
                 ),
               ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: CupertinoScrollbar(
-                child: ListView(
-                  children: <Widget>[
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                    CardTile(patientName: "Patient 1", location: "Location 1", onpressed: (){},),
-                  ],
-                ),
-              ),
+            body: CupertinoScrollbar(
+              child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("docAccepted")
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Container(
+                    child: Center(child: Text("Empty"))
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: CupertinoScrollbar(
+                        child: ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: ((context, index) {
+                              DocumentSnapshot data =
+                                  snapshot.data!.docs[index];
+                              return CardTile(
+                                patientName: data['name'],
+                                phonenumber: data['phoneNumber'],
+                                onpressed: ()async{
+                                  await FirebaseFirestore.instance
+                                      .runTransaction(
+                                          (Transaction myTransaction) async {
+                                    await myTransaction
+                                        .delete(data.reference);
+                                  });
+                                },
+                              );
+                            }))),
+                  );
+                }
+              }),
             ),
           ),
         ),
