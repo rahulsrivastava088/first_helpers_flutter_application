@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 
 class ParaLanding extends StatefulWidget {
@@ -104,12 +105,13 @@ class _ParaLandingState extends State<ParaLanding> {
                                         .collection("docAccepted")
                                         .doc(data['uid'])
                                         .set(docData);
-                                    await FirebaseFirestore.instance
-                                        .runTransaction(
-                                            (Transaction myTransaction) async {
-                                      await myTransaction
-                                          .delete(data.reference);
-                                    });
+                                    MapsLauncher.launchCoordinates(latitude, longitude);
+                                    // await FirebaseFirestore.instance
+                                    //     .runTransaction(
+                                    //         (Transaction myTransaction) async {
+                                    //   await myTransaction
+                                    //       .delete(data.reference);
+                                    // });
                                   },
                                 );
                               }))),

@@ -6,6 +6,7 @@ class CardTile extends StatelessWidget {
   String patientName;
   String phonenumber;
   void Function() onpressed;
+  
 
   CardTile({required this.patientName, required this.phonenumber, required this.onpressed});
 
@@ -31,8 +32,17 @@ class CardTile extends StatelessWidget {
           textColor: Colors.green.shade700,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                MaterialButton(
+                  onPressed: onpressed,
+                  child: Text(
+                    "Call Patient",
+                    style: TextStyle(
+                      color: Colors.green.shade700,
+                    ),
+                  ),
+                ),
                 MaterialButton(
                   onPressed: onpressed,
                   child: Text(
