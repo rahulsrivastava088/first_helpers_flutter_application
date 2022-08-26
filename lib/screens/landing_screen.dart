@@ -1,5 +1,5 @@
 import 'package:first_helpers/screens/doctor/doc_login_screen.dart';
-import 'package:first_helpers/screens/paramedic/para_landing_screen.dart';
+import 'package:first_helpers/screens/paramedic/para_dashboard_screen.dart';
 import 'package:first_helpers/screens/paramedic/para_login_screen.dart';
 import 'package:first_helpers/screens/signupScreen.dart';
 import 'package:first_helpers/screens/user/user_login_screen.dart';

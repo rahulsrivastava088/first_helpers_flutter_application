@@ -67,7 +67,7 @@ class ParaLoginScreen extends StatelessWidget {
                     .handleSignInEmail(emailController.text.trim(),
                         passwordController.text.trim())
                     .then((User user) {
-                  Navigator.pushNamed(context, ParaLanding.routeName);
+                  Navigator.pushNamed(context, ParaLandingScreen.routeName);
                 }).catchError((e) => print(e));
               },
             ),
@@ -82,7 +82,7 @@ class ParaLoginScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, ParaLanding.routeName);
+                  Navigator.pushNamed(context, ParaLandingScreen.routeName);
                 },
               ),
             ),
