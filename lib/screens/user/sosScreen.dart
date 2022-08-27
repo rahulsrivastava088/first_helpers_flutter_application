@@ -9,6 +9,7 @@ import 'package:first_helpers/utilities/loadingSpinner.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geocoding/geocoding.dart' hide Location;
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -24,6 +25,7 @@ class _SosScreenState extends State<SosScreen> {
   late LocationData currentLocation;
   late CameraPosition kGooglePost;
   late List<Marker> marker;
+  late String address;
 
   Completer<GoogleMapController> _controller = Completer();
 
@@ -31,6 +33,7 @@ class _SosScreenState extends State<SosScreen> {
   void initState() {
     super.initState();
     initLocationService();
+    // getAddress(currentLocation.latitude, currentLocation.longitude);
   }
 
   Future initLocationService() async {
@@ -68,13 +71,35 @@ class _SosScreenState extends State<SosScreen> {
       ),
     ];
 
+    // await getAddress(loc.latitude, loc.longitude);
+
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(loc.latitude!, loc.longitude!);
+    String add = placemarks.reversed.last.street.toString() +
+        ", " +
+        placemarks.reversed.last.locality.toString() +
+        ", " +
+        placemarks.reversed.last.administrativeArea.toString();
+
+
     setState(() {
       showLoading = false;
       currentLocation = loc;
       kGooglePost = camPos;
       marker = maarker;
+      address = add;
     });
   }
+
+  // void getAddress(latitude, longitude) async {
+  //   List<Placemark> placemarks =
+  //       await placemarkFromCoordinates(latitude, longitude);
+  //   address = placemarks.reversed.last.street.toString() +
+  //       " " +
+  //       placemarks.reversed.last.administrativeArea.toString() +
+  //       " " +
+  //       placemarks.reversed.last.locality.toString();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +179,8 @@ class _SosScreenState extends State<SosScreen> {
                           'phoneNumber': snap.data()?['phoneNumber'],
                           'latitude': currentLocation.latitude,
                           'longitude': currentLocation.longitude,
-                          'uid': auth.currentUser!.uid
+                          'uid': auth.currentUser!.uid,
+                          'address' : address,
                         };
 
                         FirebaseFirestore.instance

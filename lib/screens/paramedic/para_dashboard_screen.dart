@@ -14,6 +14,7 @@ class ParaDashboard extends StatefulWidget {
 }
 
 class _ParaLandingState extends State<ParaDashboard> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,13 +53,11 @@ class _ParaLandingState extends State<ParaDashboard> {
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: ((context, index) {
                           DocumentSnapshot data = snapshot.data!.docs[index];
-                          var latitude = data['latitude'];
-                          var longitude = data['longitude'];
                           return CardTile(
                             patientName: data['name'] == null
                                 ? "Anonymous"
                                 : data['name'],
-                            location: "$latitude $longitude",
+                            location: data['address'].toString(),
                             onpressed: () async {
                               Map<String, dynamic> docData = {
                                 'name': data['name'] == null
@@ -73,7 +72,7 @@ class _ParaLandingState extends State<ParaDashboard> {
                                   .doc(data['uid'])
                                   .set(docData);
                               MapsLauncher.launchCoordinates(
-                                  latitude, longitude);
+                                  data['latitude'], data['longitude']);
                               // await FirebaseFirestore.instance
                               //     .runTransaction(
                               //         (Transaction myTransaction) async {
