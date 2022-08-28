@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^3.3.0
   maps_launcher: ^2.0.1
   geocoding: ^2.0.5
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

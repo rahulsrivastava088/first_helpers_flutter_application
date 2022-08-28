@@ -33,7 +33,6 @@ class _SosScreenState extends State<SosScreen> {
   void initState() {
     super.initState();
     initLocationService();
-    // getAddress(currentLocation.latitude, currentLocation.longitude);
   }
 
   Future initLocationService() async {
@@ -71,8 +70,6 @@ class _SosScreenState extends State<SosScreen> {
       ),
     ];
 
-    // await getAddress(loc.latitude, loc.longitude);
-
     List<Placemark> placemarks =
         await placemarkFromCoordinates(loc.latitude!, loc.longitude!);
     String add = placemarks.reversed.last.street.toString() +
@@ -90,16 +87,6 @@ class _SosScreenState extends State<SosScreen> {
       address = add;
     });
   }
-
-  // void getAddress(latitude, longitude) async {
-  //   List<Placemark> placemarks =
-  //       await placemarkFromCoordinates(latitude, longitude);
-  //   address = placemarks.reversed.last.street.toString() +
-  //       " " +
-  //       placemarks.reversed.last.administrativeArea.toString() +
-  //       " " +
-  //       placemarks.reversed.last.locality.toString();
-  // }
 
   @override
   Widget build(BuildContext context) {
