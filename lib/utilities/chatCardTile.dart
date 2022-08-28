@@ -6,8 +6,8 @@ import 'constants.dart';
 class ChatTile extends StatelessWidget {
   String username;
   String imageUrl;
-
-  ChatTile({required this.username, required this.imageUrl});
+  String field;
+  ChatTile({required this.username, required this.imageUrl, required this.field});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,12 @@ class ChatTile extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      field,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
