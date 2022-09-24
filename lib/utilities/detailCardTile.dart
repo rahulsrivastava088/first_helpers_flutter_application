@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class CardTile extends StatelessWidget {
   String patientName;
   String location;
-  void Function() onpressed;
-
-  CardTile({required this.patientName, required this.location, required this.onpressed});
+  void Function() accept;
+  void Function() delete;
+  CardTile({required this.patientName, required this.location, required this.accept, required this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,19 @@ class CardTile extends StatelessWidget {
           textColor: Colors.green.shade700,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MaterialButton(
-                  onPressed: onpressed,
+                  onPressed: delete,
+                  child: Text(
+                    "DELETE",
+                    style: TextStyle(
+                      color: Colors.green.shade700,
+                    ),
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: accept,
                   child: Text(
                     "ACCEPT",
                     style: TextStyle(

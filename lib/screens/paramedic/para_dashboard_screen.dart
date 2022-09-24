@@ -58,7 +58,7 @@ class _ParaLandingState extends State<ParaDashboard> {
                                 ? "Anonymous"
                                 : data['name'],
                             location: data['address'].toString(),
-                            onpressed: () async {
+                            accept: () async {
                               Map<String, dynamic> docData = {
                                 'name': data['name'] == null
                                     ? "Anonymous"
@@ -73,13 +73,15 @@ class _ParaLandingState extends State<ParaDashboard> {
                                   .set(docData);
                               MapsLauncher.launchCoordinates(
                                   data['latitude'], data['longitude']);
-                              // await FirebaseFirestore.instance
-                              //     .runTransaction(
-                              //         (Transaction myTransaction) async {
-                              //   await myTransaction
-                              //       .delete(data.reference);
-                              // });
                             },
+                            delete: () async{
+                              await FirebaseFirestore.instance
+                                  .runTransaction(
+                                      (Transaction myTransaction) async {
+                                await myTransaction
+                                    .delete(data.reference);
+                              });
+                            }
                           );
                         }))),
               );
