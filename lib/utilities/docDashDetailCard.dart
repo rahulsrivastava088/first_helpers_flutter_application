@@ -6,9 +6,13 @@ class CardTile extends StatelessWidget {
   String patientName;
   String phonenumber;
   void Function() onpressed;
-  
+  void Function() onCall;
 
-  CardTile({required this.patientName, required this.phonenumber, required this.onpressed});
+  CardTile(
+      {required this.patientName,
+      required this.phonenumber,
+      required this.onpressed,
+      required this.onCall});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class CardTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(
-                  onPressed: onpressed,
+                  onPressed: onCall,
                   child: Text(
                     "Call Patient",
                     style: TextStyle(

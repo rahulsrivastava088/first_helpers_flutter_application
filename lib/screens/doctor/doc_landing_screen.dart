@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+
 
 class DocLanding extends StatefulWidget {
   const DocLanding({Key? key}) : super(key: key);
@@ -89,6 +91,9 @@ class _DocLandingState extends State<DocLanding> {
                               return CardTile(
                                 patientName: data['name'],
                                 phonenumber: data['phoneNumber'],
+                                onCall: ()async{
+                                  bool? res = await FlutterPhoneDirectCaller.callNumber(data['phoneNumber']);
+                                },
                                 onpressed: ()async{
                                   await FirebaseFirestore.instance
                                       .runTransaction(

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:first_helpers/utilities/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -21,26 +21,28 @@ class SosScreen extends StatefulWidget {
 }
 
 class _SosScreenState extends State<SosScreen> {
-  late bool showLoading;
+  bool showLoading = true;
+  bool showAlert = false;
   late LocationData currentLocation;
   late CameraPosition kGooglePost;
   late List<Marker> marker;
   late String address;
+  final numberController = TextEditingController();
 
   Completer<GoogleMapController> _controller = Completer();
 
   @override
   void initState() {
-    super.initState();
     initLocationService();
+
+    super.initState();
   }
 
   Future initLocationService() async {
+    // setState(() {
+    //   showLoading = true;
+    // });
     var location = Location();
-
-    setState(() {
-      showLoading = true;
-    });
 
     if (!await location.serviceEnabled()) {
       if (!await location.requestService()) {
@@ -57,15 +59,14 @@ class _SosScreenState extends State<SosScreen> {
     }
 
     var loc = await location.getLocation();
-        var camPos = CameraPosition(
+    var camPos = CameraPosition(
       target: LatLng(loc.latitude!.toDouble(), loc.longitude!.toDouble()),
       zoom: 14.4746,
     );
     List<Marker> maarker = [
-        Marker(
+      Marker(
         markerId: MarkerId('0'),
-        position: LatLng(loc.latitude!.toDouble(),
-            loc.longitude!.toDouble()),
+        position: LatLng(loc.latitude!.toDouble(), loc.longitude!.toDouble()),
         infoWindow: const InfoWindow(title: 'Your Location'),
       ),
     ];
@@ -77,7 +78,6 @@ class _SosScreenState extends State<SosScreen> {
         placemarks.reversed.last.locality.toString() +
         ", " +
         placemarks.reversed.last.administrativeArea.toString();
-
 
     setState(() {
       showLoading = false;
@@ -95,94 +95,152 @@ class _SosScreenState extends State<SosScreen> {
           ? LoadingScreen(
               hintText: "Fetching Location..",
             )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                  child: Text(
-                    "An Emergency?\nJust press the 'SOS' button below and we'll be on our way to your current location.",
-                    softWrap: true,
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 250,
-                  width: MediaQuery.of(context).size.width * 0.97,
-                  child: Container(
-                    child: GoogleMap(
-                      initialCameraPosition: kGooglePost,
-                      myLocationButtonEnabled: false,
-                      mapType: MapType.hybrid,
-                      markers: Set<Marker>.from(marker),
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
-                    ),
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(2.0),
-                    decoration: BoxDecoration(
-                        color: logoGreen,
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                          color: logoBlue,
-                          width: 2,
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 70.0,
-                    top: 8,
-                  ),
-                  child: GestureDetector(
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(Size(180, 180)),
-                        elevation: MaterialStateProperty.all(20),
-                        shadowColor: MaterialStateProperty.all(Colors.red),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100.0),
-                              side: BorderSide(color: Colors.red)),
-                        ),
+          : Container(
+              child: showAlert
+                  ? AlertDialog(
+                      title: Text("Enter Phone Number:"),
+                      content: TextField(
+                        controller: numberController,
+                        onChanged: (value) {},
+                        keyboardType: TextInputType.number,
                       ),
-                      onPressed: () async {
-                        // print(currentLocation!.latitude.toString() +" "+ currentLocation!.longitude.toString());
-                        var snap = await FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(auth.currentUser!.uid)
-                            .get();
-
-                        Map<String, dynamic> data = {
-                          'name': snap.data()?['name'],
-                          'phoneNumber': snap.data()?['phoneNumber'],
-                          'latitude': currentLocation.latitude,
-                          'longitude': currentLocation.longitude,
-                          'uid': auth.currentUser!.uid,
-                          'address' : address,
-                        };
-
-                        FirebaseFirestore.instance
-                            .collection('locations')
-                            .doc(auth.currentUser!.uid)
-                            .set(data);
-                      },
-                      child: Image.asset('images/sos.png'),
+                      actions: <Widget>[
+                        TextButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.green),
+                              textStyle: MaterialStateProperty.all(
+                                  TextStyle(color: Colors.white))),
+                          child: Text('OK'),
+                          onPressed: () async {
+                            setState(() {
+                              showAlert = false;
+                              // Navigator.pop(context);
+                            });
+                            var snap = await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(auth.currentUser!.uid)
+                                .get();
+                            Map<String, dynamic> data = {
+                              'name': snap.data()?['name'],
+                              'phoneNumber': numberController.text,
+                              'latitude': currentLocation.latitude,
+                              'longitude': currentLocation.longitude,
+                              'uid': auth.currentUser!.uid,
+                              'address': address,
+                            };
+                            FirebaseFirestore.instance
+                                .collection('locations')
+                                .doc(auth.currentUser!.uid)
+                                .set(data);
+                            CoolAlert.show(
+                              context: context,
+                              type: CoolAlertType.success,
+                              text: "Alert was sent successfully!!!",
+                            );
+                          },
+                        ),
+                      ],
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8.0,
+                          ),
+                          child: Text(
+                            "An Emergency?\nJust press the 'SOS' button below and we'll be on our way to your current location.",
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 250,
+                          width: MediaQuery.of(context).size.width * 0.97,
+                          child: Container(
+                            child: GoogleMap(
+                              initialCameraPosition: kGooglePost,
+                              myLocationButtonEnabled: false,
+                              mapType: MapType.hybrid,
+                              markers: Set<Marker>.from(marker),
+                              onMapCreated: (GoogleMapController controller) {
+                                _controller.complete(controller);
+                              },
+                            ),
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                                color: logoGreen,
+                                borderRadius: BorderRadius.circular(8.0),
+                                border: Border.all(
+                                  color: logoBlue,
+                                  width: 2,
+                                )),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 70.0,
+                            top: 8,
+                          ),
+                          child: GestureDetector(
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                fixedSize:
+                                    MaterialStateProperty.all(Size(180, 180)),
+                                elevation: MaterialStateProperty.all(20),
+                                shadowColor:
+                                    MaterialStateProperty.all(Colors.red),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                      side: BorderSide(color: Colors.red)),
+                                ),
+                              ),
+                              onPressed: () async {
+                                // print(currentLocation!.latitude.toString() +" "+ currentLocation!.longitude.toString());
+                                var snap = await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(auth.currentUser!.uid)
+                                    .get();
+                                if (snap.data()?['name'] != null) {
+                                  Map<String, dynamic> data = {
+                                    'name': snap.data()?['name'],
+                                    'phoneNumber': snap.data()?['phoneNumber'],
+                                    'latitude': currentLocation.latitude,
+                                    'longitude': currentLocation.longitude,
+                                    'uid': auth.currentUser!.uid,
+                                    'address': address,
+                                  };
+                                  FirebaseFirestore.instance
+                                      .collection('locations')
+                                      .doc(auth.currentUser!.uid)
+                                      .set(data);
+                                  CoolAlert.show(
+                                      context: context,
+                                      type: CoolAlertType.success,
+                                      text: "Alert was sent successfully!!!",
+                                      );
+                                } else {
+                                  setState(() {
+                                    showAlert = true;
+                                  });
+                                }
+                              },
+                              child: Image.asset('images/sos.png'),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
             ),
     );
   }
-
 }
-

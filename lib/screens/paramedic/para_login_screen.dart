@@ -75,7 +75,7 @@ class ParaLoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 child: const Text(
-                  'Skip for now ->',
+                  '',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
